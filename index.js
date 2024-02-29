@@ -15,13 +15,30 @@ var nanoPow = Math.pow(10,9);
 function durationToSeconds(dur) {
   return dur[0] + dur[1] / nanoPow;
 }
+function durationToMinutes(dur) {
+  return (dur[0] + dur[1] / nanoPow)*60;
+}
+function durationToHours(dur) {
+  return (dur[0] + dur[1] / nanoPow)*3600;
+}
 
 var space = ' ';
 var sAbbr = 's';
+var mAbbr = 'm';
+var hAbbr = 'h';
 var places = 4;
 var maxDisplaySecondsDigits = 4;
 function formatDuration(dur) {
   return durationToSeconds(dur).toFixed(places) + sAbbr;
+}
+
+function formatTotalDuration(dur) {
+  if (durationToSeconds(dur).toFixed(places) > 3601) {
+      return durationToHours(dur).toFixed(places) + hAbbr;
+  } else if ((durationToSeconds(dur).toFixed(places) > 61)) {
+      return durationToMinutes(dur).toFixed(places) + sAbbr;
+  } else {
+      return durationToSeconds(dur).toFixed(places) + sAbbr;
 }
 
 var start = process.hrtime();
@@ -187,7 +204,7 @@ module.exports = function(opts) {
     this.queue(
       stampLine(blank, '') +
       padFor(totalLabel, maxDurLength) + totalLabel + bar +
-        formatDuration(elapsedTotal) + newline
+        formatTotalDuration(elapsedTotal) + newline
     );
     if (autoUpdate) clearTimeout(autoUpdate);
   });
