@@ -39,6 +39,7 @@ function formatTotalDuration(dur) {
       return durationToMinutes(dur).toFixed(places) + sAbbr;
   } else {
       return durationToSeconds(dur).toFixed(places) + sAbbr;
+  }
 }
 
 var start = process.hrtime();
