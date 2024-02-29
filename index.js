@@ -33,10 +33,10 @@ function formatDuration(dur) {
 }
 
 function formatTotalDuration(dur) {
-  if (durationToSeconds(dur).toFixed(places) > 3601) {
+  if (durationToSeconds(dur) > 3601) {
       return durationToHours(dur).toFixed(places) + hAbbr;
-  } else if ((durationToSeconds(dur).toFixed(places) > 61)) {
-      return durationToMinutes(dur).toFixed(places) + sAbbr;
+  } else if ((durationToSeconds(dur) > 61)) {
+      return durationToMinutes(dur).toFixed(places) + mAbbr;
   } else {
       return durationToSeconds(dur).toFixed(places) + sAbbr;
   }
